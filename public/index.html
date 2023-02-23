@@ -2,6 +2,38 @@
 <html>
   <head>
     <title>Slow Down and Reverb</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      input[type="file"] {
+        margin: 10px 0;
+      }
+
+      a {
+        display: block;
+        text-align: center;
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+    </style>
   </head>
   <body>
     <h1>Slow Down and Reverb</h1>
@@ -16,7 +48,26 @@
 
     <script>
       var audio = document.getElementById('player');
-      audio.src = 'processed.mp3';
+
+      // Add event listener to the form submit button
+      var form = document.querySelector('form');
+      form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from submitting
+
+        // Create a FormData object to send the file to the server
+        var formData = new FormData(form);
+
+        // Send a POST request to the server with the file data
+        var request = new XMLHttpRequest();
+        request.open('POST', 'process.php');
+        request.addEventListener('load', function() {
+          if (request.status === 200) {
+            // Set the audio player source to the processed file
+            audio.src = 'processed.mp3';
+          }
+        });
+        request.send(formData);
+      });
     </script>
   </body>
 </html>
