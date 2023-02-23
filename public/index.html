@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Slow Down and Reverb</title>
+  </head>
+  <body>
+    <h1>Slow Down and Reverb</h1>
+    <form action="process.php" method="post" enctype="multipart/form-data">
+      <input type="file" name="file">
+      <br>
+      <input type="submit" value="Upload">
+    </form>
+
+    <audio id="player" controls></audio>
+    <a href="processed.mp3" download>Download Processed File</a>
+
+    <script>
+      var audio = document.getElementById('player');
+      audio.src = 'processed.mp3';
+    </script>
+  </body>
+</html>
